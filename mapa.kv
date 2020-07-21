@@ -1,0 +1,79 @@
+<Toolbar@BoxLayout>:
+    size_hint_y: None
+    height: '48dp'
+    width:  '800dp'
+    padding: '4dp'
+    spacing: '4dp'
+    canvas:
+        Color:
+            rgba: .2, .2, .2, .6
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<Manager>:
+    MenuMapa:
+        name: 'menu'
+    BuscaTipo:
+        name: 'busca_tipo'
+    Desenha:
+        name: 'desenha'
+
+
+<MenuMapa>:
+    ScrollView:
+        BoxLayout:
+            orientation:'vertical'
+            size_y: None
+            Button:
+                text:'Buscar por tipo'
+                on_press: root.manager.current = 'busca_tipo'
+            Button:
+                text:'Consultar e exibir linhas e poligonos'
+                on_press: root.manager.current = 'desenha'
+<BuscaTipo>:
+    MapView:
+        id: mapview
+        lat: -23.563114
+        lon: -46.665945
+        zoom: 5
+        Toolbar:
+            top: root.top
+            BoxLayout:
+                orientation:'vertical'
+                id:box
+                ActionBar:
+                    ActionView:
+                        ActionPrevious:
+                            title: 'Busca Por Tipo De Comida'
+                            on_press:root.manager.current = 'menu'
+        Toolbar:
+            BoxLayout:
+                Button:
+                    text:'Buscar'
+                    on_press:root.pesquisa()
+
+
+
+<Desenha>:
+    MapView:
+        id: mapview
+        lat: -23.563114
+        lon: -46.665945
+        zoom: 15
+        Toolbar:
+            top: root.top
+            BoxLayout:
+                orientation:'vertical'
+                id:box
+                ActionBar:
+                    ActionView:
+                        ActionPrevious:
+                            title: 'Desenha'
+                            on_press:root.manager.current = 'menu'
+        Toolbar:
+            BoxLayout:
+                Button:
+                    text:'Desenhar'
+                    on_press:root.desenha()
+
